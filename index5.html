@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 소개</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .background {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+        }
+
+        .title, .instructor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: yellow;
+            animation: fadeInOut 3s infinite;
+        }
+
+        .instructor {
+            top: 60%;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+        }
+
+        span {
+            animation: moveCenter 4s infinite;
+        }
+
+        @keyframes moveCenter {
+            0% { opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="title">제목</div>
+        <div class="instructor">강사명</div>
+    </div>
+    <script>
+        const background = document.querySelector('.background');
+
+        function generateRandomCharacter() {
+            const names = ['이현', '김은경', '조은숙'];
+            return names[Math.floor(Math.random() * names.length)];
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        setInterval(() => {
+            const span = document.createElement('span');
+            span.textContent = generateRandomCharacter();
+            span.style.position = 'absolute';
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.top = Math.random() * 100 + 'vh';
+            span.style.animationDuration = Math.random() * 2 + 2 + 's';
+            span.style.fontSize = Math.random() * 20 + 15 + 'px';
+            span.style.color = getRandomColor();
+            background.appendChild(span);
+
+            setTimeout(() => {
+                span.remove();
+            }, 4000);
+        }, 50);
+    </script>
+</body>
+</html>
